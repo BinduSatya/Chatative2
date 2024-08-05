@@ -2,7 +2,10 @@ const express = require("express");
 const app = express();
 const chats = require("./data/data");
 const dotenv = require("dotenv");
+const connectDB = require("./config/db.js");
+
 dotenv.config({ path: "../.env" });
+connectDB();
 
 app.get("/", (req, res) => {
   res.send("Hello it is running");
