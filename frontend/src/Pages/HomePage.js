@@ -1,51 +1,49 @@
-import React from "react";
 import {
   Box,
-  Text,
-  Tabs,
-  Tab,
-  TabIndicator,
-  TabPanels,
-  TabPanel,
-  TabList,
   Container,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
+  Text,
 } from "@chakra-ui/react";
-import Login from "../components/authentication/login";
-import Signup from "../components/authentication/signup";
+import { useEffect } from "react";
+import { useHistory } from "react-router";
+import Login from "../components/Authentication/Login";
+import Signup from "../components/Authentication/Signup";
 
-const HomePage = () => {
+function Homepage() {
+  const history = useHistory();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("userInfo"));
+
+    if (user) history.push("/chats");
+  }, [history]);
+
   return (
-    <Container
-      fontFamily={"Work Sans"}
-      w={"100vw"}
-      h={"100vh"}
-      backgroundColor={"#353"}
-      centerContent
-    >
+    <Container maxW="xl" centerContent>
       <Box
-        maxW={"xl"}
         d="flex"
-        m={"4"}
-        p={"3"}
         justifyContent="center"
-        backgroundColor={"#273"}
+        p={3}
+        bg="white"
+        w="100%"
+        m="40px 0 15px 0"
+        borderRadius="lg"
+        borderWidth="1px"
       >
-        <Text fontSize={"2xl"} fontFamily={"Work Sans"} color={"white"}>
-          Hello Chatative
+        <Text fontSize="4xl" fontFamily="Work sans">
+          Talk-A-Tive
         </Text>
       </Box>
-      <Box backgroundColor={"#ff3"} p={"4"} borderRadius={"lg"} w={"100%"}>
-        <Tabs position="relative" variant="soft-rounded" color={"blue"}>
-          <TabList mb="10px">
+      <Box bg="white" w="100%" p={4} borderRadius="lg" borderWidth="1px">
+        <Tabs isFitted variant="soft-rounded">
+          <TabList mb="1em">
             <Tab>Login</Tab>
             <Tab>Sign Up</Tab>
           </TabList>
-          <TabIndicator
-            mt="-1.5px"
-            height="2px"
-            bg="skyblue"
-            borderRadius="1px"
-          />
           <TabPanels>
             <TabPanel>
               <Login />
@@ -58,6 +56,6 @@ const HomePage = () => {
       </Box>
     </Container>
   );
-};
+}
 
-export default HomePage;
+export default Homepage;
