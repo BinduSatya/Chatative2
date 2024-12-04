@@ -1,0 +1,1 @@
+food.splice(3, 4, "yes")
